@@ -1,0 +1,48 @@
+.sidebar {
+  border-right: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  padding-top: 10px;
+
+  ul.files {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+
+    > li {
+      padding: 5px 20px;
+
+      &:hover {
+        cursor: pointer;
+        background-color: #f4f3f3;
+      }
+
+      &.active {
+        border-right: 2px solid #003cff;
+        background-color: #eceaea;
+      }
+    }
+  }
+
+  label {
+    font-weight: bold;
+    margin-left: 5px;
+    margin-bottom: 3px;
+  }
+
+  .run {
+    background-color: #dceede;
+    padding: 20px;
+    color: white;
+    font-weight: 200;
+    text-align: center;
+    color: #78b087;
+
+    > span {
+      font-size: .7em;
+    }
+  }
+}
