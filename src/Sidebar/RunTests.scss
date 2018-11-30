@@ -1,0 +1,25 @@
+.sidebar {
+  .action {
+    padding: 20px;
+    font-weight: 200;
+    text-align: center;
+    > span {
+      font-size: .7em;
+    }
+  }
+
+  .run {
+    background-color: #dceede;
+    color: #78b087;
+  }
+
+  .running {
+    background-color: #b2c4ff;
+    color: #003cff;
+  }
+
+  .failed {
+    background-color: #e8c6c6;
+    color: #c70707;
+  }
+}

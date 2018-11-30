@@ -3,7 +3,7 @@ import './App.scss';
 import api from './utils/api';
 import searchParams from './utils/searchParams';
 import CodeFile from './CodeFile';
-import Sidebar from './Sidebar';
+import Sidebar from './Sidebar/Sidebar';
 
 const { api_key } = searchParams();
 
@@ -11,6 +11,10 @@ class App extends Component {
   state = {
     codeFiles: [],
     activeCodeFileId: null,
+    executionStatus: {
+      running: false,
+      output: null,
+    },
   }
   async componentDidMount() {
     const { data: { codeFiles }} = await api.get(`content/5adab204929d249e5faefb4d?api_key=${api_key}`);
@@ -34,7 +38,7 @@ class App extends Component {
       ]
     });
   }
-  runCode = () => {
+  runCode = async () => {
     const {codeFiles} = this.state;
 
     const files = codeFiles.map(({ code, initialCode, executablePath }) => ({
@@ -42,15 +46,31 @@ class App extends Component {
       path: executablePath,
     }));
   
-    api.post(`execute/5adab204929d249e5faefb4d?api_key=${api_key}`, { files })
+    this.setState({ executionStatus: {
+      running: true,
+      output: null,
+    }});
+    
+    const { data } = await api.post(`execute/5adab204929d249e5faefb4d?api_key=${api_key}`, { files });
+    
+    this.setState({ executionStatus: {
+      running: false,
+      output: data,
+    }});
   }
   render() {
     if(!api_key) return <div> API Key not provided </div>
-    const { codeFiles, activeCodeFileId } = this.state;
+    const { codeFiles, activeCodeFileId, executionStatus } = this.state;
     return (
       <div className="app">
-        <Sidebar codeFiles={codeFiles} activeCodeFileId={activeCodeFileId} updateActive={this.updateActive} runCode={this.runCode}/>
-        <CodeFile codeFiles={codeFiles} activeCodeFileId={activeCodeFileId} updateCode={this.updateCode}/>
+        <Sidebar codeFiles={codeFiles} 
+                  activeCodeFileId={activeCodeFileId} 
+                  updateActive={this.updateActive} 
+                  executionStatus={executionStatus}
+                  runCode={this.runCode}/>
+        <CodeFile codeFiles={codeFiles} 
+                  activeCodeFileId={activeCodeFileId} 
+                  updateCode={this.updateCode} />
       </div>
     );
   }
