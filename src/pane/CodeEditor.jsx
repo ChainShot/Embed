@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import * as monaco from 'monaco-editor'
-import monacoTheme from './utils/monacoTheme';
-import defaultMonacoOptions from './utils/monacoOptions';
+import monacoTheme from '../utils/monacoTheme';
+import defaultMonacoOptions from '../utils/monacoOptions';
 import './CodeEditor.scss';
 
 const theme = 'cs-theme';

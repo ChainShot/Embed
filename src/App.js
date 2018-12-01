@@ -2,15 +2,16 @@ import React, { Component } from 'react';
 import './App.scss';
 import api from './utils/api';
 import searchParams from './utils/searchParams';
-import CodeFile from './CodeFile';
-import Sidebar from './Sidebar/Sidebar';
+import CodeFile from './pane/CodeFile';
+import Sidebar from './sidebar/Sidebar';
+import RunResults from './pane/RunResults';
 
 const { api_key } = searchParams();
 
 class App extends Component {
   state = {
     codeFiles: [],
-    activeCodeFileId: null,
+    activePane: null,
     executionStatus: {
       running: false,
       output: null,
@@ -20,11 +21,11 @@ class App extends Component {
     const { data: { codeFiles }} = await api.get(`content/5adab204929d249e5faefb4d?api_key=${api_key}`);
     this.setState({ 
       codeFiles,
-      activeCodeFileId: codeFiles[0].id,
+      activePane: codeFiles[0].id,
     });
   }
-  updateActive = (activeCodeFileId) => {
-    this.setState({ activeCodeFileId })
+  updateActive = (activePane) => {
+    this.setState({ activePane })
   }
   updateCode = (id, code) => {
     const { codeFiles } = this.state;
@@ -60,17 +61,19 @@ class App extends Component {
   }
   render() {
     if(!api_key) return <div> API Key not provided </div>
-    const { codeFiles, activeCodeFileId, executionStatus } = this.state;
+    const { codeFiles, activePane, executionStatus } = this.state;
     return (
       <div className="app">
         <Sidebar codeFiles={codeFiles} 
-                  activeCodeFileId={activeCodeFileId} 
+                  activePane={activePane} 
                   updateActive={this.updateActive} 
                   executionStatus={executionStatus}
                   runCode={this.runCode}/>
         <CodeFile codeFiles={codeFiles} 
-                  activeCodeFileId={activeCodeFileId} 
+                  activeCodeFileId={activePane} 
                   updateCode={this.updateCode} />
+        <RunResults activePane={activePane}          
+                executionStatus={executionStatus} />
       </div>
     );
   }

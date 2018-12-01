@@ -1,0 +1,104 @@
+$tiny-spacing: 3px;
+$danger-light: #c04343;
+$border-radius: 3px;
+$success-color: #61a56f;
+$danger-color: #822b22;
+$accent-background-color: #232735;
+$main-line-color: #363636;
+
+.run-output {
+  width: 100%;
+  background-color: #f8f8ff;
+}
+
+.run-results {
+  overflow: auto;
+  height: 100%;
+  width: 100%;
+  padding: 10px;
+}
+
+.run-result-item__test-results {
+  margin-left: 2.5rem;
+}
+
+.result-type {
+  font-weight: normal;
+  margin: $tiny-spacing 0;
+  font-size: 15px;
+  border-radius: 4px;
+  overflow: auto;
+}
+
+.result-type--tree {
+  svg {
+    fill: black;
+    margin-right: 8px;
+  }
+}
+
+.result-type--it {
+  svg {
+    height: 13px;
+    width: 13px;
+  }
+}
+
+.result-type--describe {
+  svg {
+    height: 15px;
+    width: 15px;
+  }
+}
+
+.result-type--log {
+  svg {
+    height: 13px;
+    width: 13px;
+    fill: black;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+.result-type--passed, .result-type--failed {
+  display: flex;
+  svg {
+    height: 16px;
+    width: 16px;
+    margin-right: 5px;
+  }
+}
+
+.result-type--passed {
+  color: $success-color;
+  svg {
+    fill: $success-color;
+  }
+}
+
+.result-type--error {
+  border: 2px solid $danger-color;
+  background-color: $accent-background-color;
+  color: black;
+  padding: 10px;
+  pre {
+    margin: 0;
+  }
+}
+
+.result-type--failed {
+  color: $danger-light;
+  svg {
+    fill: $danger-light;
+  }
+}
+
+.result-type--log {
+  padding: $tiny-spacing;
+  background-color: white;
+  border: 1px solid #ddd;
+  position: relative;
+  margin-bottom: .5rem;
+}
