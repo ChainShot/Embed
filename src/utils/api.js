@@ -1,4 +1,4 @@
 const axios = require('axios');
-const baseURL = process.env.API_URL || 'http://localhost:3002/';
+const { API_URL } = require('../config');
 
-module.exports = axios.create({ baseURL });
+module.exports = axios.create({ baseURL: API_URL });
