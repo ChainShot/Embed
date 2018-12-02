@@ -1,0 +1,85 @@
+.sidebar {
+  .action {
+    padding: 20px;
+    font-weight: 200;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    border-right: 2px solid transparent;
+
+    label {
+      font-weight: 200;
+      display: block;
+      margin: 0;
+      margin-bottom: 10px;
+    }
+
+    svg {
+      height: 20px;
+      width: auto;
+      margin-bottom: 5px;
+    }
+
+    .split {
+      display: flex;
+      justify-content: center;
+      > div {
+        padding: 0 10px;
+      }
+    }
+  }
+
+  .clickable {
+    cursor: pointer;
+  }
+
+  .run, .passed {
+    $font: #78b087;
+    background-color: #dceede;
+    color: $font;
+    &.active {
+      border-right: 2px solid darken($font, 20);
+      .search {
+        color: darken($font, 20);
+        cursor: default;
+      }
+    }
+    .clickable, &.clickable {
+      &:hover {
+        color: darken($font, 20);
+      }
+    }
+  }
+
+  .running {
+    $font: #003cff;
+    background-color: #b2c4ff;
+    color: $font;
+    &.active {
+      border-right: 2px solid $font;
+    }
+    .clickable, &.clickable {
+      &:hover {
+        color: darken($font, 20);
+      }
+    }
+  }
+
+  .failed {
+    $font: #c70707;
+    background-color: #e8c6c6;
+    color: $font;
+    &.active {
+      border-right: 2px solid darken($font, 20);
+      .search {
+        color: darken($font, 20);
+        cursor: default;
+      }
+    }
+    .clickable, &.clickable {
+      &:hover {
+        color: darken($font, 20);
+      }
+    }
+  }
+}
