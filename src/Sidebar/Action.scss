@@ -38,7 +38,11 @@
     background-color: #dceede;
     color: $font;
     &.active {
-      border-right: 2px solid $font;
+      border-right: 2px solid darken($font, 20);
+      .search {
+        color: darken($font, 20);
+        cursor: default;
+      }
     }
     .clickable, &.clickable {
       &:hover {
@@ -66,7 +70,11 @@
     background-color: #e8c6c6;
     color: $font;
     &.active {
-      border-right: 2px solid $font;
+      border-right: 2px solid darken($font, 20);
+      .search {
+        color: darken($font, 20);
+        cursor: default;
+      }
     }
     .clickable, &.clickable {
       &:hover {

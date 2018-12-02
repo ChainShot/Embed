@@ -7,6 +7,7 @@ class RunResults extends Component {
     const { executionStatus: { output, running }, activePane } = this.props;
     if(activePane !== "results") return null;
     if(running) return <div className="run-output"> Running your tests... </div>
+    if(!output) return <div className="run-output"> Execution stopped. </div>
     return <RunOutput response={output} />
   }
 }

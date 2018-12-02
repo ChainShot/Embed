@@ -45,6 +45,7 @@
     "react-dev-utils": "^6.1.1",
     "react-dom": "^16.6.3",
     "resolve": "1.8.1",
+    "route-parser": "^0.0.5",
     "sass-loader": "7.1.0",
     "style-loader": "0.23.0",
     "terser-webpack-plugin": "1.1.0",

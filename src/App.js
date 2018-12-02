@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import './App.scss';
 import api from './utils/api';
-import searchParams from './utils/searchParams';
+import searchParams from './utils/routeParams';
 import CodeFile from './pane/CodeFile';
 import Sidebar from './sidebar/Sidebar';
 import RunResults from './pane/RunResults';
 
-const { api_key } = searchParams();
+const { apiKey, stageId } = searchParams();
 
 class App extends Component {
   state = {
@@ -19,7 +19,7 @@ class App extends Component {
     },
   }
   async componentDidMount() {
-    const { data: { codeFiles }} = await api.get(`content/5adab204929d249e5faefb4d?api_key=${api_key}`);
+    const { data: { codeFiles }} = await api.get(`content/${stageId}?api_key=${apiKey}`);
     this.setState({ 
       codeFiles,
       activePane: codeFiles[0].id,
@@ -59,12 +59,11 @@ class App extends Component {
       ...this.state.executionStatus,
       running: true,
       output: null,
-    }});
+    }, activePane: 'results' });
     
-    const { data } = await api.post(`execute/5adab204929d249e5faefb4d?api_key=${api_key}`, { files });
+    const { data } = await api.post(`execute/${stageId}?api_key=${apiKey}`, { files });
     
     const latestId = this.state.executionStatus.id;
-    console.log(latestId, id, this.state);
     // check the id has not changed, otherwise ignore
     if(latestId === id) {
       this.setState({ executionStatus: {
@@ -75,7 +74,7 @@ class App extends Component {
     }
   }
   render() {
-    if(!api_key) return <div> API Key not provided </div>
+    if(!apiKey) return <div> API Key not provided </div>
     const { codeFiles, activePane, executionStatus } = this.state;
     return (
       <div className="app">

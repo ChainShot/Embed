@@ -42,7 +42,7 @@ class Action extends Component {
               <div className="clickable" onClick={runCode}>
                 <SVG name="redo" />
               </div>
-              <div className="clickable" onClick={() => updateActive('results')}>
+              <div className="clickable search" onClick={() => updateActive('results')}>
                 <SVG name="search" />
               </div>
             </div>
