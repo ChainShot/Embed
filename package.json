@@ -47,6 +47,7 @@
     "resolve": "1.8.1",
     "route-parser": "^0.0.5",
     "sass-loader": "7.1.0",
+    "serve": "^10.1.1",
     "style-loader": "0.23.0",
     "terser-webpack-plugin": "1.1.0",
     "url-loader": "1.1.1",
@@ -58,7 +59,8 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js"
+    "test": "node scripts/test.js",
+    "serve": "serve -s build"
   },
   "eslintConfig": {
     "extends": "react-app"
