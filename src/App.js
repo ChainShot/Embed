@@ -15,6 +15,7 @@ class App extends Component {
     executionStatus: {
       running: false,
       output: null,
+      id: 0,
     },
   }
   async componentDidMount() {
@@ -39,8 +40,15 @@ class App extends Component {
       ]
     });
   }
+  stopExecution = () => {
+    this.setState({ executionStatus: {
+      ...this.state.executionStatus,
+      running: false,
+      id: this.state.executionStatus.id + 1,
+    }});
+  }
   runCode = async () => {
-    const {codeFiles} = this.state;
+    const {codeFiles, executionStatus: { id }} = this.state;
 
     const files = codeFiles.map(({ code, initialCode, executablePath }) => ({
       contents: (code === undefined) ? initialCode : code,
@@ -48,16 +56,23 @@ class App extends Component {
     }));
   
     this.setState({ executionStatus: {
+      ...this.state.executionStatus,
       running: true,
       output: null,
     }});
     
     const { data } = await api.post(`execute/5adab204929d249e5faefb4d?api_key=${api_key}`, { files });
     
-    this.setState({ executionStatus: {
-      running: false,
-      output: data,
-    }});
+    const latestId = this.state.executionStatus.id;
+    console.log(latestId, id, this.state);
+    // check the id has not changed, otherwise ignore
+    if(latestId === id) {
+      this.setState({ executionStatus: {
+        running: false,
+        output: data,
+        id: id + 1,
+      }});
+    }
   }
   render() {
     if(!api_key) return <div> API Key not provided </div>
@@ -68,6 +83,7 @@ class App extends Component {
                   activePane={activePane} 
                   updateActive={this.updateActive} 
                   executionStatus={executionStatus}
+                  stopExecution={this.stopExecution}
                   runCode={this.runCode}/>
         <CodeFile codeFiles={codeFiles} 
                   activeCodeFileId={activePane} 

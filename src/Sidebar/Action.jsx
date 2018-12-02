@@ -4,13 +4,13 @@ import SVG from '../SVG';
 
 class Action extends Component {
   render() {
-    const { runCode, updateActive, activePane, executionStatus: { output, running } } = this.props;
+    const { runCode, stopExecution, updateActive, activePane, executionStatus: { output, running } } = this.props;
     const actionClasses = ['action'];
     if(activePane === 'results') actionClasses.push('active');
     if(running) {
       actionClasses.push('running', 'clickable');
       return (
-        <div className={actionClasses.join(' ')} onClick={runCode}> 
+        <div className={actionClasses.join(' ')} onClick={stopExecution}> 
           <label> Running... </label>
           <SVG name="stop" />
         </div>

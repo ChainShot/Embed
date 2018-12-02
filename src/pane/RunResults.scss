@@ -8,6 +8,7 @@ $main-line-color: #363636;
 
 .run-output {
   width: 100%;
+  padding: 10px;
   background-color: #f8f8ff;
 }
 
@@ -15,7 +16,6 @@ $main-line-color: #363636;
   overflow: auto;
   height: 100%;
   width: 100%;
-  padding: 10px;
 }
 
 .run-result-item__test-results {
