@@ -1,3 +1,5 @@
+@import '../variables';
+
 .sidebar {
   .action {
     padding: 20px;
@@ -34,51 +36,48 @@
   }
 
   .run, .passed {
-    $font: #78b087;
-    background-color: #dceede;
-    color: $font;
+    background-color: $success-dark;
+    color: $success-light;
     &.active {
-      border-right: 2px solid darken($font, 20);
+      border-right: 2px solid darken($success-light, 20);
       .search {
-        color: darken($font, 20);
+        color: darken($success-light, 20);
         cursor: default;
       }
     }
     .clickable, &.clickable {
       &:hover {
-        color: darken($font, 20);
+        color: darken($success-light, 20);
       }
     }
   }
 
   .running {
-    $font: #003cff;
-    background-color: #b2c4ff;
-    color: $font;
+    background-color: $info-dark;
+    color: $info-light;
     &.active {
-      border-right: 2px solid $font;
+      border-right: 2px solid $info-light;
     }
     .clickable, &.clickable {
       &:hover {
-        color: darken($font, 20);
+        color: darken($info-light, 20);
       }
     }
   }
 
   .failed {
-    $font: #c70707;
-    background-color: #e8c6c6;
-    color: $font;
+    background-color: $danger-dark;
+    color: $danger-light;
     &.active {
-      border-right: 2px solid darken($font, 20);
+      border-right: 2px solid darken($danger-light, 20);
       .search {
-        color: darken($font, 20);
+        color: darken($danger-light, 20);
         cursor: default;
       }
     }
     .clickable, &.clickable {
       &:hover {
-        color: darken($font, 20);
+        color: darken($danger-light, 20);
       }
     }
   }

@@ -3,7 +3,7 @@ import './App.scss';
 import api from './utils/api';
 import searchParams from './utils/routeParams';
 import CodeFile from './pane/CodeFile';
-import Sidebar from './sidebar/Sidebar';
+import Sidebar from './nav/Sidebar';
 import RunResults from './pane/RunResults';
 
 const { apiKey, stageId } = searchParams();
