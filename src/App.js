@@ -20,7 +20,7 @@ class App extends Component {
   }
   async componentDidMount() {
     const { data: { codeFiles }} = await api.get(`content/${stageId}?api_key=${apiKey}`);
-    this.setState({ 
+    this.setState({
       codeFiles,
       activePane: codeFiles[0].id,
     });
@@ -50,19 +50,18 @@ class App extends Component {
   runCode = async () => {
     const {codeFiles, executionStatus: { id }} = this.state;
 
-    const files = codeFiles.map(({ code, initialCode, executablePath }) => ({
-      contents: (code === undefined) ? initialCode : code,
-      path: executablePath,
+    const files = codeFiles.map(({ code, initialCode, id }) => ({
+      id, contents: (code === undefined) ? initialCode : code
     }));
-  
+
     this.setState({ executionStatus: {
       ...this.state.executionStatus,
       running: true,
       output: null,
     }, activePane: 'results' });
-    
+
     const { data } = await api.post(`execute/${stageId}?api_key=${apiKey}`, { files });
-    
+
     const latestId = this.state.executionStatus.id;
     // check the id has not changed, otherwise ignore
     if(latestId === id) {
@@ -78,16 +77,16 @@ class App extends Component {
     const { codeFiles, activePane, executionStatus } = this.state;
     return (
       <div className="app">
-        <Sidebar codeFiles={codeFiles} 
-                  activePane={activePane} 
-                  updateActive={this.updateActive} 
+        <Sidebar codeFiles={codeFiles}
+                  activePane={activePane}
+                  updateActive={this.updateActive}
                   executionStatus={executionStatus}
                   stopExecution={this.stopExecution}
                   runCode={this.runCode}/>
-        <CodeFile codeFiles={codeFiles} 
-                  activeCodeFileId={activePane} 
+        <CodeFile codeFiles={codeFiles}
+                  activeCodeFileId={activePane}
                   updateCode={this.updateCode} />
-        <RunResults activePane={activePane}          
+        <RunResults activePane={activePane}
                 executionStatus={executionStatus} />
       </div>
     );
