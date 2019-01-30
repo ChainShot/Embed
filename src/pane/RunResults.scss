@@ -1,9 +1,12 @@
-@import '../variables';
+@import '../shared/scss/variables';
 
 .run-output {
   width: 100%;
   padding: 10px;
   background-color: #f8f8ff;
+  position: absolute;
+  left: $sidebar-width;
+  height: 100%;
 }
 
 .run-results {

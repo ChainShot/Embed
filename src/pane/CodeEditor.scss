@@ -1,4 +1,11 @@
+@import '../shared/scss/variables';
+
 .code-editor {
   height: 100%;
+  position: absolute;
+  left: $sidebar-width;
+  top: 0;
+  bottom: 0;
+  right: 0;
   flex-grow: 1;
 }
