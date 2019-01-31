@@ -22,7 +22,7 @@ export const codeRunFinish = ({ output, err }) => ({
   payload: { output, err }
 });
 export const codeRunCancel = () => ({ type: CODE_RUN_CANCEL });
-export const changeFocus = (codeFileId) => ({
+export const changeFocus = (focus) => ({
   type: CHANGE_FOCUS,
-  payload: { codeFileId }
+  payload: { focus }
 });

@@ -11,12 +11,12 @@ const initialState = {
 }
 
 export default function(state = initialState, action) {
-  const { codeFileId } = action.payload || {};
+  const { focus } = action.payload || {};
   switch (action.type) {
     case CHANGE_FOCUS:
       return {
         ...state,
-        focus: codeFileId,
+        focus,
       }
     case CODE_RUN_START:
       return {
