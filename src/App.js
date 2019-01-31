@@ -4,6 +4,7 @@ import Sidebar from './nav/Sidebar';
 import RunResults from './pane/RunResults';
 import './network/runner';
 import './network/loader';
+import './network/listener';
 import './App.scss';
 
 class App extends Component {
