@@ -1,4 +1,11 @@
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import rootReducer from './reducers';
+import sideEffects from './sideEffects';
+import createMiddleware from './sideEffects/middleware';
 
-export default createStore(rootReducer);
+const store = createStore(
+  rootReducer,
+  applyMiddleware(createMiddleware(sideEffects)),
+);
+
+export default store;

@@ -11,11 +11,11 @@ export default function(state = initialState, action) {
     case LOAD_CODEFILES:
       return codeFiles;
     case CODE_UPDATE:
-      const idx = codeFiles.findIndex(x => x.id === codeFileId);
+      const idx = state.findIndex(x => x.id === codeFileId);
       return [
-        codeFiles.slice(0, idx),
-        { ...codeFiles[idx], code },
-        codeFiles.slice(idx + 1),
+        ...state.slice(0, idx),
+        { ...state[idx], code },
+        ...state.slice(idx + 1),
       ]
     default:
       return state

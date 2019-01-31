@@ -1,7 +1,7 @@
-import store from './redux/store';
-import {loadCodeFiles} from './redux/actions';
-import searchParams from './utils/routeParams';
-import api from './utils/api';
+import store from '../redux/store';
+import {loadCodeFiles} from '../redux/actions';
+import searchParams from '../utils/routeParams';
+import api from '../utils/api';
 
 const { apiKey, stageId } = searchParams();
 

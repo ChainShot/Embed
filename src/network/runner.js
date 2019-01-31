@@ -1,8 +1,7 @@
-import store from './redux/store';
-import {codeRunFinish} from './redux/actions';
-import {CODE_RUN_START} from './redux/actionTypes';
-import api from './utils/api';
-import searchParams from './utils/routeParams';
+import store from '../redux/store';
+import {codeRunFinish} from '../redux/actions';
+import api from '../utils/api';
+import searchParams from '../utils/routeParams';
 
 const { apiKey, stageId } = searchParams();
 

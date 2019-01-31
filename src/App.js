@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import CodeFile from './pane/CodeFile';
 import Sidebar from './nav/Sidebar';
 import RunResults from './pane/RunResults';
-import './runner';
-import './loader';
+import './network/runner';
+import './network/loader';
 import './App.scss';
 
 class App extends Component {
