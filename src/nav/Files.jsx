@@ -12,8 +12,8 @@ class Files extends Component {
           if(id === activeCodeFileId) classes.push('active');
           const svgName = testFixture ? 'flask' : 'editable';
           return (
-            <li key={id} 
-                className={classes.join(' ')} 
+            <li key={id}
+                className={classes.join(' ')}
                 onClick={() => updateActive(id)}>
                 <SVG name={svgName} />
                 { name }
