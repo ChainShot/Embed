@@ -12,9 +12,9 @@ export const loadCodeFiles = (codeFiles) => ({
   payload: { codeFiles }
 });
 
-export const codeUpdate = (codeFileId, code) => ({
+export const codeUpdate = (codeFileId, code, changes) => ({
   type: CODE_UPDATE,
-  payload: { codeFileId, code }
+  payload: { codeFileId, code, changes }
 });
 export const codeRunStart = () => ({ type: CODE_RUN_START });
 export const codeRunFinish = ({ output, err }) => ({

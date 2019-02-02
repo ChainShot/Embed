@@ -5,6 +5,8 @@ import {
   CODE_RUN_FINISH,
   CODE_RUN_CANCEL,
   CHANGE_FOCUS,
+  WATCH_MODE_ON,
+  WATCH_MODE_OFF,
 } from "../redux/actionTypes";
 
 const actionTypes = [
@@ -13,6 +15,8 @@ const actionTypes = [
   CODE_RUN_FINISH,
   CODE_RUN_CANCEL,
   CHANGE_FOCUS,
+  WATCH_MODE_ON,
+  WATCH_MODE_OFF,
 ]
 
 window.addEventListener("message", receiveMessage, false);

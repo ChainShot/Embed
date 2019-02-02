@@ -4,15 +4,28 @@ import {
 import {
   CHANGE_FOCUS,
   CODE_RUN_START,
+  WATCH_MODE_OFF,
+  WATCH_MODE_ON,
 } from '../actionTypes';
 
 const initialState = {
   focus: null,
+  watchMode: false,
 }
 
 export default function(state = initialState, action) {
   const { focus } = action.payload || {};
   switch (action.type) {
+    case WATCH_MODE_OFF:
+      return {
+        ...state,
+        watchMode: false,
+      }
+    case WATCH_MODE_ON:
+      return {
+        ...state,
+        watchMode: true,
+      }
     case CHANGE_FOCUS:
       return {
         ...state,

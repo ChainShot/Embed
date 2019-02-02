@@ -22,8 +22,10 @@ function mergeById(a, b) {
 
 // ideally LOAD_CODEFILES would happen before CODE_UPDATE
 // but most of the edge case logic here handles in case it happens in reverse
+// TODO: any code updates happening before loading code files should not create code files
+// rather, it should be held in some kind of a cache until loaded and then merged
 export default function(state = initialState, action) {
-  const { codeFileId, code, codeFiles } = action.payload || {};
+  const { codeFileId, code, changes, selections, codeFiles } = action.payload || {};
   switch (action.type) {
     case LOAD_CODEFILES:
       return mergeById(codeFiles, state);
@@ -32,7 +34,12 @@ export default function(state = initialState, action) {
       if(idx === -1) return [{ id: codeFileId, code }]
       return [
         ...state.slice(0, idx),
-        { ...state[idx], code },
+        {
+          ...state[idx],
+          code,
+          selections: (state[idx].selections || []).concat(selections),
+          changes: (state[idx].changes || []).concat(changes),
+        },
         ...state.slice(idx + 1),
       ]
     default:
