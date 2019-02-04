@@ -25,8 +25,8 @@ async function load() {
     return a.name.localeCompare(b.name);
   }).filter(x => x.visible);
 
-  store.dispatch(loadCodeFiles(sorted));
-  store.dispatch(changeFocus(sorted[0].id));
+  store.dispatch({ ...loadCodeFiles(sorted), source: "external" });
+  store.dispatch({ ...changeFocus(sorted[0].id), source: "external" });
 }
 
 load();

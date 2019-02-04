@@ -6,6 +6,7 @@ import {
   CODE_RUN_START,
   WATCH_MODE_OFF,
   WATCH_MODE_ON,
+  UPDATE_STATE,
 } from '../actionTypes';
 
 const initialState = {
@@ -14,8 +15,13 @@ const initialState = {
 }
 
 export default function(state = initialState, action) {
-  const { focus } = action.payload || {};
+  const { focus, ui } = action.payload || {};
   switch (action.type) {
+    case UPDATE_STATE:
+      return {
+        ...state,
+        focus: ui.focus,
+      }
     case WATCH_MODE_OFF:
       return {
         ...state,

@@ -1,6 +1,8 @@
 import {
   CODE_UPDATE,
+  CODE_SELECTIONS,
   LOAD_CODEFILES,
+  UPDATE_STATE,
 } from "../actionTypes";
 
 const initialState = [];
@@ -25,11 +27,25 @@ function mergeById(a, b) {
 // TODO: any code updates happening before loading code files should not create code files
 // rather, it should be held in some kind of a cache until loaded and then merged
 export default function(state = initialState, action) {
-  const { codeFileId, code, changes, selections, codeFiles } = action.payload || {};
+  const { codeFileId, code, changes, selections, ts, codeFiles } = action.payload || {};
   switch (action.type) {
+    case UPDATE_STATE:
+      return codeFiles
     case LOAD_CODEFILES:
       return mergeById(codeFiles, state);
-    case CODE_UPDATE:
+    case CODE_SELECTIONS: {
+      const idx = state.findIndex(x => x.id === codeFileId);
+      if(idx === -1) return state;
+      return [
+        ...state.slice(0, idx),
+        {
+          ...state[idx],
+          selections, // replace selections (we only care about the latest)
+        },
+        ...state.slice(idx + 1),
+      ]
+    }
+    case CODE_UPDATE: {
       const idx = state.findIndex(x => x.id === codeFileId);
       if(idx === -1) return [{ id: codeFileId, code }]
       return [
@@ -37,11 +53,11 @@ export default function(state = initialState, action) {
         {
           ...state[idx],
           code,
-          selections: (state[idx].selections || []).concat(selections),
-          changes: (state[idx].changes || []).concat(changes),
+          changes: (state[idx].changes || []).concat(changes || []),
         },
         ...state.slice(idx + 1),
       ]
+    }
     default:
       return state
   }

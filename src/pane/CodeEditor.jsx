@@ -12,32 +12,36 @@ class CodeEditor extends Component {
     latestChange: null,
   }
   componentDidMount() {
-    const {code, mode, watchMode, onUpdate} = this.props;
+    const {code, mode, onUpdate, onSelection} = this.props;
     this.editor = monaco.editor.create(this.refs.container, {
       ...defaultMonacoOptions,
       theme,
       value: code,
       language: mode,
     });
+    this.editor.onDidChangeCursorSelection(({ selection }) => {
+      const ts = Date.now();
+      onSelection({ selections: { updates: [selection], ts }});
+    });
     this.editor.onDidChangeModelContent((e) => {
-      if(!watchMode) {
-        const ts = Date.now();
-        onUpdate({
-          value: this.editor.getValue(),
-          changes: e.changes.map(x => ({ ...x, ts })),
-        });
-      }
+      const ts = Date.now();
+      onUpdate({
+        value: this.editor.getValue(),
+        selections: { updates: this.editor.getSelections(), ts },
+        changes: e.changes.map(x => ({ ...x, ts })),
+      });
     });
   }
   componentDidUpdate(prevProps) {
-    const { changes, watchMode, code } = this.props;
+    const { changes, watchMode, code, selections } = this.props;
     if(watchMode) {
+      const { latestChange } = this.state;
       if((changes || []).length > (prevProps.changes || []).length) {
-        const updates = changes.filter(x => x.ts > this.state.latestChange);
+        const updates = changes.filter(x => x.ts > latestChange);
         const mostRecent = updates.sort((a,b) => b.ts - a.ts)[0];
         if(updates.length > 0) {
           try {
-            this.editor.executeEdits('updates', updates);
+            this.editor.executeEdits('updates', updates, selections.updates);
           }
           catch(ex) {
             // overlapping ranges across a series of updates can cause issues
@@ -48,6 +52,9 @@ class CodeEditor extends Component {
           }
           this.setState({ latestChange: mostRecent.ts });
         }
+      }
+      if(selections && (selections.ts > latestChange)) {
+        this.editor.setSelections(selections.updates);
       }
     }
     if((prevProps.code !== code) && (code !== this.editor.getValue())) {

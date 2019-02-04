@@ -7,8 +7,8 @@ const { apiKey, stageId } = searchParams();
 
 let runningWas;
 store.subscribe(async () => {
-  const {codeFiles, execution: { running }} = store.getState();
-  if(running && !runningWas) {
+  const {codeFiles, execution: { running }, ui: { watchMode }} = store.getState();
+  if(running && !runningWas && !watchMode) {
     const files = codeFiles.map(({ code, initialCode, id }) => ({
       id, contents: (code === undefined) ? initialCode : code
     }));

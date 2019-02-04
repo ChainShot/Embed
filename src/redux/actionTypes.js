@@ -1,6 +1,7 @@
 export const LOAD_CODEFILES = 'LOAD_CODEFILES';
 
 export const CODE_UPDATE = 'CODE_UPDATE';
+export const CODE_SELECTIONS = 'CODE_SELECTIONS';
 export const CODE_RUN_START = 'CODE_RUN_START';
 export const CODE_RUN_FINISH = 'CODE_RUN_FINISH';
 export const CODE_RUN_CANCEL = 'CODE_RUN_CANCEL';
@@ -8,3 +9,5 @@ export const CHANGE_FOCUS = 'CHANGE_FOCUS';
 
 export const WATCH_MODE_ON = 'WATCH_MODE_ON';
 export const WATCH_MODE_OFF = 'WATCH_MODE_OFF';
+
+export const UPDATE_STATE = 'UPDATE_STATE';

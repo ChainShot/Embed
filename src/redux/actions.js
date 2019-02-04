@@ -1,10 +1,12 @@
 import {
   LOAD_CODEFILES,
   CODE_UPDATE,
+  CODE_SELECTIONS,
   CODE_RUN_START,
   CODE_RUN_FINISH,
   CODE_RUN_CANCEL,
   CHANGE_FOCUS,
+  UPDATE_STATE,
 } from "./actionTypes";
 
 export const loadCodeFiles = (codeFiles) => ({
@@ -12,9 +14,13 @@ export const loadCodeFiles = (codeFiles) => ({
   payload: { codeFiles }
 });
 
-export const codeUpdate = (codeFileId, code, changes) => ({
+export const codeUpdate = (codeFileId, code, changes, selections) => ({
   type: CODE_UPDATE,
-  payload: { codeFileId, code, changes }
+  payload: { codeFileId, code, changes, selections }
+});
+export const codeSelections = (codeFileId, selections) => ({
+  type: CODE_SELECTIONS,
+  payload: { codeFileId, selections }
 });
 export const codeRunStart = () => ({ type: CODE_RUN_START });
 export const codeRunFinish = ({ output, err }) => ({

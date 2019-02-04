@@ -2,6 +2,7 @@ import {
   CODE_RUN_START,
   CODE_RUN_FINISH,
   CODE_RUN_CANCEL,
+  UPDATE_STATE,
 } from "../actionTypes";
 
 const initialState = {
@@ -12,8 +13,10 @@ const initialState = {
 }
 
 export default function(state = initialState, action) {
-  const { output, err } = action.payload || {};
+  const { output, err, execution } = action.payload || {};
   switch (action.type) {
+    case UPDATE_STATE:
+      return execution
     case CODE_RUN_START:
       return {
         ...state,
