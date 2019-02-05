@@ -10,7 +10,6 @@ class Sidebar extends Component {
     const { codeFiles, ui: { focus }, changeFocus, codeRunStart, execution, codeRunCancel } = this.props;
     return (
       <div className="sidebar">
-        <label> Files </label>
         <Files codeFiles={codeFiles} activeCodeFileId={focus} updateActive={changeFocus} />
         <Action runCode={codeRunStart} executionStatus={execution} updateActive={changeFocus} stopExecution={codeRunCancel} activePane={focus}/>
       </div>

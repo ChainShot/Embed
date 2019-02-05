@@ -1,25 +1,12 @@
 @import '../shared/scss/variables';
 
 .sidebar {
-  border-right: 1px solid #ddd;
   display: flex;
   flex-direction: column;
   position: fixed;
   width: $sidebar-width;
   z-index: 1;
-  background-color: white;
+  background-color: #eee;
   height: 100%;
   overflow-x: auto;
-
-  > label {
-    padding: 10px;
-    color: #777;
-    letter-spacing: 5px;
-    text-transform: uppercase;
-    text-align: center;
-    font-size: .8em;
-    font-weight: 400;
-    background-color: #eee;
-    border-bottom: 1px solid #ddd;
-  }
 }
