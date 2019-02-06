@@ -2,6 +2,7 @@ import store from '../redux/store';
 import {loadCodeFiles, changeFocus} from '../redux/actions';
 import searchParams from '../utils/routeParams';
 import api from '../utils/api';
+import { ready } from './broadcaster';
 
 const { apiKey, stageId } = searchParams();
 
@@ -27,6 +28,8 @@ async function load() {
 
   store.dispatch({ ...loadCodeFiles(sorted), source: "external" });
   store.dispatch({ ...changeFocus(sorted[0].id), source: "external" });
+
+  ready();
 }
 
 load();

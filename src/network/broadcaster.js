@@ -1,11 +1,20 @@
-function postMessage(obj) {
-  window.parent.postMessage(JSON.stringify(obj), '*');
+function postMessage(msg) {
+  window.parent.postMessage(msg, '*');
+}
+
+function postJSON(obj) {
+  postMessage(JSON.stringify(obj));
 }
 
 function relay(action) {
-  postMessage(action);
+  postJSON(action);
+}
+
+function ready() {
+  postMessage("ready");
 }
 
 export {
-  relay
+  relay,
+  ready,
 }
