@@ -1,12 +1,12 @@
+@import '../shared/scss/variables';
+
 .sidebar {
-  border-right: 1px solid #ddd;
   display: flex;
   flex-direction: column;
-  padding-top: 10px;
-
-  label {
-    font-weight: bold;
-    margin-left: 5px;
-    margin-bottom: 5px;
-  }
+  position: fixed;
+  width: $sidebar-width;
+  z-index: 1;
+  background-color: #eee;
+  height: 100%;
+  overflow-x: auto;
 }

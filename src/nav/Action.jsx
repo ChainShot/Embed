@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import './Action.scss';
+import { RESULTS_FOCUS } from '../config';
 import SVG from '../SVG';
 
 class Action extends Component {
   render() {
     const { runCode, stopExecution, updateActive, activePane, executionStatus: { output, running } } = this.props;
     const actionClasses = ['action'];
-    if(activePane === 'results') actionClasses.push('active');
+    if(activePane === RESULTS_FOCUS) actionClasses.push('active');
     if(running) {
       actionClasses.push('running', 'clickable');
       return (
-        <div className={actionClasses.join(' ')} onClick={stopExecution}> 
+        <div className={actionClasses.join(' ')} onClick={stopExecution}>
           <label> Running... </label>
           <SVG name="stop" />
         </div>
@@ -20,13 +21,13 @@ class Action extends Component {
       if(output.result.completed) {
         actionClasses.push('passed');
         return (
-          <div className={actionClasses.join(' ')}> 
+          <div className={actionClasses.join(' ')}>
             <label> Tests Passed! </label>
             <div className="split">
               <div className="clickable" onClick={runCode}>
                 <SVG name="redo" />
               </div>
-              <div className="clickable" onClick={() => updateActive('results')}>
+              <div className="clickable" onClick={() => updateActive(RESULTS_FOCUS)}>
                 <SVG name="search" />
               </div>
             </div>
@@ -36,13 +37,13 @@ class Action extends Component {
       else {
         actionClasses.push('failed');
         return (
-          <div className={actionClasses.join(' ')}> 
+          <div className={actionClasses.join(' ')}>
             <label> Tests Failed </label>
             <div className="split">
               <div className="clickable" onClick={runCode}>
                 <SVG name="redo" />
               </div>
-              <div className="clickable search" onClick={() => updateActive('results')}>
+              <div className="clickable search" onClick={() => updateActive(RESULTS_FOCUS)}>
                 <SVG name="search" />
               </div>
             </div>
@@ -52,7 +53,7 @@ class Action extends Component {
     }
     actionClasses.push('run', 'clickable');
     return (
-      <div className={actionClasses.join(' ')} onClick={runCode}> 
+      <div className={actionClasses.join(' ')} onClick={runCode}>
         <label> Run Tests </label>
         <SVG name="play" />
       </div>

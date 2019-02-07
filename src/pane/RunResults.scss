@@ -1,9 +1,12 @@
-@import '../variables';
+@import '../shared/scss/variables';
 
 .run-output {
   width: 100%;
   padding: 10px;
-  background-color: #f8f8ff;
+  background-color: #FDFDFD;
+  position: absolute;
+  left: $sidebar-width;
+  height: 100%;
 }
 
 .run-results {
@@ -26,7 +29,7 @@
 
 .result-type--tree {
   svg {
-    fill: black;
+    fill: #24292e;
     margin-right: 8px;
   }
 }
@@ -49,7 +52,7 @@
   svg {
     height: 13px;
     width: 13px;
-    fill: black;
+    fill: #24292e;
     &:hover {
       cursor: pointer;
     }

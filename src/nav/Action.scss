@@ -1,9 +1,8 @@
-@import '../variables';
+@import '../shared/scss/variables';
 
 .sidebar {
   .action {
     padding: 20px;
-    font-weight: 200;
     text-align: center;
     display: flex;
     flex-direction: column;

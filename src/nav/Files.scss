@@ -1,3 +1,5 @@
+@import '../shared/scss/variables';
+
 .sidebar {
   ul.files {
     padding: 0;
@@ -19,8 +21,13 @@
       }
 
       &.active {
-        border-right: 2px solid #003cff;
-        background-color: #eceaea;
+        border-right: 2px solid $info-light;
+        background-color: $info-dark;
+        color: $info-light;
+        svg {
+          color: $info-light;
+          fill: $info-light;
+        }
       }
 
       svg {
