@@ -27,9 +27,14 @@ async function load() {
   }).filter(x => x.visible);
 
   store.dispatch({ ...loadCodeFiles(sorted), source: "external" });
-  store.dispatch({ ...changeFocus(sorted[0].id), source: "external" });
 
+  // signal to external applications that data is loaded
   ready();
+
+  // focus the first code file by default
+  // this is done after ready so external applications can handle
+  // merging progress with the existing data before we send out updates
+  store.dispatch({ ...changeFocus(sorted[0].id), source: "external" });
 }
 
 load();
