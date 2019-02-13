@@ -6,7 +6,6 @@ import {
   CODE_RUN_FINISH,
   CODE_RUN_CANCEL,
   CHANGE_FOCUS,
-  UPDATE_STATE,
 } from "./actionTypes";
 
 export const loadCodeFiles = (codeFiles) => ({
