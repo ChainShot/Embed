@@ -20,7 +20,7 @@ function mergeById(a, b) {
 }
 
 export default function(state = initialState, action) {
-  const { codeFileId, code, changes, selections, ts, codeFiles } = action.payload || {};
+  const { codeFileId, code, changes, selections, codeFiles } = action.payload || {};
   switch (action.type) {
     case UPDATE_STATE:
       // merges the codefiles into the existing state by id

@@ -61,8 +61,23 @@ class CodeEditor extends Component {
       this.editor.setValue(code || "");
     }
   }
+  onKeyUp = () => {
+    const { code, watchMode } = this.props;
+    if(watchMode && code !== this.editor.getValue()) {
+      this.editor.setValue(code || "");
+    }
+  }
+  onKeyPress = (evt) => {
+    if(this.props.watchMode) {
+      evt.preventDefault();
+    }
+  }
   render() {
-    return <div className="code-editor" ref="container" />
+    return <div
+      className="code-editor"
+      ref="container"
+      onKeyUp={this.onKeyUp}
+      onKeyPress={this.onKeyPress}/>
   }
 }
 
