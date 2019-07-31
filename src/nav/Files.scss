@@ -8,6 +8,7 @@
     display: flex;
     flex-direction: column;
     flex-grow: 1;
+    color: #333;
 
     > li {
       padding: 5px 20px;
@@ -21,8 +22,7 @@
       }
 
       &.active {
-        border-right: 2px solid $info-light;
-        background-color: $info-dark;
+        background-color: darken(#f4f3f3, 10);
         color: $info-light;
         svg {
           color: $info-light;
@@ -34,6 +34,7 @@
         height: 18px;
         margin-right: 10px;
         width: auto;
+        fill: #333;
       }
     }
   }

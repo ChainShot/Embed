@@ -24,7 +24,14 @@ async function load() {
       }
     }
     return a.name.localeCompare(b.name);
-  }).filter(x => x.visible);
+  }).filter(x => x.visible).map((codeFile) => {
+    // the code property is used to keep track of the workspace
+    // if it is not provided initially there is no initial benchmark to use
+    return {
+      ...codeFile,
+      code: codeFile.initialCode
+    }
+  });
 
   store.dispatch({ ...loadCodeFiles(sorted), source: "external" });
 
