@@ -3,7 +3,7 @@ const app = express();
 const cors = require('cors');
 const http = require('http');
 const path = require('path');
-const PORT = 5052;
+const PORT = process.env.PORT || 5052;
 
 app.use(express.json({limit: '1mb'}));
 app.use(cors({}));
