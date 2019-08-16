@@ -8,19 +8,24 @@ const { apiKey, stageId } = searchParams();
 
 async function load() {
   const { data: { codeFiles }} = await api.get(`content/${stageId}?api_key=${apiKey}`);
-  // list of booleans where a should be taken if a is true and b is false
+  // list of booleans where a should be lower if a is true and b is false
   // listed in order of priority for the sort
   const BOOLEAN_SORT_PROPS = [
-    'hasProgress',
     'readOnly',
     'executable',
     'testFixture',
+    '!hasProgress',
   ]
+  console.log({ codeFiles });
   const sorted = codeFiles.sort((a,b) => {
     for(let i = 0; i < BOOLEAN_SORT_PROPS.length; i++) {
-      const sortProp = BOOLEAN_SORT_PROPS[i];
-      if(a[sortProp] && b[sortProp] && a[sortProp] !== b[sortProp]) {
-        return a[sortProp] - b[sortProp];
+      let sortProp = BOOLEAN_SORT_PROPS[i];
+      const reversed = (sortProp[0] === '!');
+      if(reversed) {
+        sortProp = sortProp.slice(1);
+      }
+      if(a.hasOwnProperty(sortProp) && b.hasOwnProperty(sortProp) && (a[sortProp] !== b[sortProp])) {
+        return (a[sortProp] - b[sortProp]) * (reversed ? -1 : 1);
       }
     }
     return a.name.localeCompare(b.name);
