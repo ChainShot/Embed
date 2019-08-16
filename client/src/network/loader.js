@@ -16,7 +16,6 @@ async function load() {
     'testFixture',
     '!hasProgress',
   ]
-  console.log({ codeFiles });
   const sorted = codeFiles.sort((a,b) => {
     for(let i = 0; i < BOOLEAN_SORT_PROPS.length; i++) {
       let sortProp = BOOLEAN_SORT_PROPS[i];
