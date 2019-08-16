@@ -20,9 +20,18 @@ const actions = [
 
 export default (action) => {
   if(actions.indexOf(action.type) >= 0) {
-    broadcaster.relay({
-      ...action,
-      state: store.getState(),
-    });
+    const state = store.getState();
+    if(action.type === CHANGE_FOCUS) {
+      broadcaster.relay({
+        ...action,
+        state: { ui: state.ui },
+      });
+    }
+    else {
+      broadcaster.relay({
+        ...action,
+        state,
+      });
+    }
   }
 }
