@@ -37,10 +37,12 @@ async function load() {
     }
   });
 
-  store.dispatch({ ...loadCodeFiles(sorted), source: "external" });
-
   // signal to external applications that data is loaded
   ready();
+
+  // allow external applications to be ready so they can recieve the load message
+  // in case they rely on this initial state to be set
+  store.dispatch({ ...loadCodeFiles(sorted), source: "external" });
 
   // focus the first code file by default
   // this is done after ready so external applications can handle
