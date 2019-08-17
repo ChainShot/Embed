@@ -8,19 +8,23 @@ const { apiKey, stageId } = searchParams();
 
 async function load() {
   const { data: { codeFiles }} = await api.get(`content/${stageId}?api_key=${apiKey}`);
-  // list of booleans where a should be taken if a is true and b is false
+  // list of booleans where a should be lower if a is true and b is false
   // listed in order of priority for the sort
   const BOOLEAN_SORT_PROPS = [
-    'hasProgress',
     'readOnly',
     'executable',
     'testFixture',
+    '!hasProgress',
   ]
   const sorted = codeFiles.sort((a,b) => {
     for(let i = 0; i < BOOLEAN_SORT_PROPS.length; i++) {
-      const sortProp = BOOLEAN_SORT_PROPS[i];
-      if(a[sortProp] && b[sortProp] && a[sortProp] !== b[sortProp]) {
-        return a[sortProp] - b[sortProp];
+      let sortProp = BOOLEAN_SORT_PROPS[i];
+      const reversed = (sortProp[0] === '!');
+      if(reversed) {
+        sortProp = sortProp.slice(1);
+      }
+      if(a.hasOwnProperty(sortProp) && b.hasOwnProperty(sortProp) && (a[sortProp] !== b[sortProp])) {
+        return (a[sortProp] - b[sortProp]) * (reversed ? -1 : 1);
       }
     }
     return a.name.localeCompare(b.name);
@@ -33,10 +37,12 @@ async function load() {
     }
   });
 
-  store.dispatch({ ...loadCodeFiles(sorted), source: "external" });
-
   // signal to external applications that data is loaded
   ready();
+
+  // allow external applications to be ready so they can recieve the load message
+  // in case they rely on this initial state to be set
+  store.dispatch({ ...loadCodeFiles(sorted), source: "external" });
 
   // focus the first code file by default
   // this is done after ready so external applications can handle

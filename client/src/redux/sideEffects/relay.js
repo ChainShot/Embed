@@ -7,6 +7,7 @@ import {
   CODE_RUN_FINISH,
   CODE_RUN_CANCEL,
   CHANGE_FOCUS,
+  LOAD_CODEFILES,
 } from "../actionTypes";
 
 const actions = [
@@ -15,14 +16,24 @@ const actions = [
   CODE_RUN_START,
   CODE_RUN_FINISH,
   CODE_RUN_CANCEL,
-  CHANGE_FOCUS
+  CHANGE_FOCUS,
+  LOAD_CODEFILES,
 ];
 
 export default (action) => {
   if(actions.indexOf(action.type) >= 0) {
-    broadcaster.relay({
-      ...action,
-      state: store.getState(),
-    });
+    const state = store.getState();
+    if(action.type === CHANGE_FOCUS) {
+      broadcaster.relay({
+        ...action,
+        state: { ui: state.ui },
+      });
+    }
+    else {
+      broadcaster.relay({
+        ...action,
+        state,
+      });
+    }
   }
 }

@@ -24,7 +24,7 @@ export default function(state = initialState, action) {
   switch (action.type) {
     case UPDATE_STATE:
       // merges the codefiles into the existing state by id
-      return mergeById(state, codeFiles);
+      return mergeById(state, codeFiles || []);
     case LOAD_CODEFILES:
       return codeFiles;
     case CODE_SELECTIONS: {
