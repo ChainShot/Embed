@@ -15,8 +15,8 @@ const initialState = {
 export default function(state = initialState, action) {
   const { output, err, execution } = action.payload || {};
   switch (action.type) {
-    case UPDATE_STATE:
-      return execution
+    case UPDATE_STATE: 
+      return execution || initialState;
     case CODE_RUN_START:
       return {
         ...state,
