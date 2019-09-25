@@ -31,6 +31,10 @@ class CodeEditor extends Component {
         changes: e.changes.map(x => ({ ...x, ts })),
       });
     });
+    const cmdEnter = monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter;
+    this.editor.addCommand(cmdEnter, () => {
+      this.props.codeRunStart();
+    });
   }
   componentDidUpdate(prevProps) {
     const { changes, watchMode, code, selections } = this.props;
